@@ -1,4 +1,4 @@
-# GitHub Security Alerts 🔒 
+# GitHub Security Alerts 🔒
 
 GitHub Security Alerts is a VS Code extension, that displays the active security alerts for your currently opened GitHub repository. It supports both [dependabot](https://docs.github.com/en/code-security/dependabot/dependabot-security-updates/about-dependabot-security-updates), and [code scanning](https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-alerts) alerts, and allows you to quickly view, resolve, and dismiss them, directly from your editor. That way, you never miss an opportunity to improve the security of your code! 💪
 
@@ -12,12 +12,15 @@ Conceptually, this extension is like an editor-integrated equivalent of the `Sec
 
 1. Install this extension, and reload VS Code
 1. Open the `GitHub` tab in the activity bar
-1. Find the `Security` veiw and click the `Sign in` button
+1. Find the `Security` veiw, and click the `Sign in` button
+
+   <img width="300px" src="https://user-images.githubusercontent.com/116461/196751218-3dec6050-d704-4c35-8989-442d7ed5c4f0.png" />
+
 1. View and manage your security alerts! 🚀
 
 ## Dependabot 🤖
 
-Dependabot automatically scans your codebase for external dependencies (e.g. npm, pip), and uses the [GitHub Advisory Database](https://github.com/advisories) to alert you when there's a security vulnerability in one or more of them. 
+Dependabot automatically scans your codebase for external dependencies (e.g. npm, pip), and uses the [GitHub Advisory Database](https://github.com/advisories) to alert you when there's a security vulnerability in one or more of them.
 
 Within the `Security` view, you can see the list of all _active_ vulnerability alerts, categorized by severity. When you click on a specific alert, it will open the respective dependency's manifest file (e.g. `package-lock.json`), and display the details of the vulnerability.
 

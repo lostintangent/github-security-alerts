@@ -82,7 +82,7 @@ export async function showFileWithAlert(
       author: {
         name: summary,
         iconPath: Uri.parse(
-          "https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
+          "https://cdn.jsdelivr.net/gh/lostintangent/github-security-alerts/icon.png"
         ),
       },
     },
