@@ -1,0 +1,247 @@
+{
+  "name": "github-security-alerts",
+  "displayName": "GitHub Security Alerts",
+  "description": "View and resolve security alerts for GitHub repositories, directly from your editor.",
+  "publisher": "lostintangent",
+  "icon": "icon.png",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.71.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "keywords": [
+    "github",
+    "security"
+  ],
+  "activationEvents": [
+    "onCommand:github-security.refresh",
+    "onCommand:github-security.signIn",
+    "onView:github-security.alerts"
+  ],
+  "main": "./dist/extension.js",
+  "browser": "./dist/extension-web.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "GitHub Security",
+      "properties": {
+        "github-security.dependabot.showDevelopmentDependencies": {
+          "default": "true",
+          "type": "boolean",
+          "description": "Specifies whether to show alerts for development-only dependencies."
+        }
+      }
+    },
+    "commands": [
+      {
+        "command": "github-security.dismissCodeScanningAlert",
+        "title": "Dismiss Alert"
+      },
+      {
+        "command": "github-security.dismissDependabotAlert",
+        "title": "Dismiss Alert"
+      },
+      {
+        "command": "github-security.signIn",
+        "title": "Sign In",
+        "category": "GitHub Security"
+      },
+      {
+        "command": "github-security.refresh",
+        "title": "Refresh Alerts",
+        "icon": "$(refresh)",
+        "category": "GitHub Security"
+      },
+      {
+        "command": "github-security.viewDependabotAdvisoryInBrowser",
+        "title": "View in Advisory Database",
+        "icon": "$(shield)"
+      },
+      {
+        "command": "github-security.viewAlertInBrowser",
+        "title": "View Alert in GitHub",
+        "icon": "$(globe)"
+      },
+      {
+        "command": "github-security.viewCodeScanningAlertsInBrowser",
+        "title": "View Alerts in GitHub",
+        "icon": "$(globe)"
+      },
+      {
+        "command": "github-security.viewDependabotAlertsInBrowser",
+        "title": "View Alerts in GitHub",
+        "icon": "$(globe)"
+      },
+      {
+        "command": "github-security.viewAlertsInBrowser",
+        "title": "View Alerts in GitHub",
+        "icon": "$(globe)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "github-security.signIn",
+          "when": "github-security:enabled && github-security:state != SignedIn"
+        },
+        {
+          "command": "github-security.refresh",
+          "when": "github-security:state == SignedIn"
+        },
+        {
+          "command": "github-security.dismissCodeScanningAlert",
+          "when": "false"
+        },
+        {
+          "command": "github-security.dismissDependabotAlert",
+          "when": "false"
+        },
+        {
+          "command": "github-security.viewDependabotAdvisoryInBrowser",
+          "when": "false"
+        },
+        {
+          "command": "github-security.viewAlertInBrowser",
+          "when": "false"
+        },
+        {
+          "command": "github-security.viewDependabotAlertsInBrowser",
+          "when": "false"
+        },
+        {
+          "command": "github-security.viewCodeScanningAlertsInBrowser",
+          "when": "false"
+        },
+        {
+          "command": "github-security.viewAlertsInBrowser",
+          "when": "false"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "github-security.refresh",
+          "when": "view == github-security.alerts && github-security:enabled && github-security:state == SignedIn",
+          "group": "navigation@1"
+        },
+        {
+          "command": "github-security.viewAlertsInBrowser",
+          "when": "view == github-security.alerts && github-security:enabled && github-security:state == SignedIn",
+          "group": "navigation@2"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "github-security.viewAlertInBrowser",
+          "when": "view == github-security.alerts && viewItem =~ /^alert/",
+          "group": "inline@1"
+        },
+        {
+          "command": "github-security.viewDependabotAdvisoryInBrowser",
+          "when": "view == github-security.alerts && viewItem == alert.dependabot",
+          "group": "inline@2"
+        },
+        {
+          "command": "github-security.viewAlertInBrowser",
+          "when": "view == github-security.alerts && viewItem =~ /^alert/",
+          "group": "basic@1"
+        },
+        {
+          "command": "github-security.viewDependabotAdvisoryInBrowser",
+          "when": "view == github-security.alerts && viewItem == alert.dependabot",
+          "group": "basic@2"
+        },
+        {
+          "command": "github-security.dismissDependabotAlert",
+          "when": "view == github-security.alerts && viewItem == alert.dependabot",
+          "group": "dimsiss@1"
+        },
+        {
+          "command": "github-security.dismissCodeScanningAlert",
+          "when": "view == github-security.alerts && viewItem == alert.codeScanning",
+          "group": "dimsiss@1"
+        },
+        {
+          "command": "github-security.viewDependabotAlertsInBrowser",
+          "when": "view == github-security.alerts && viewItem == dependabot",
+          "group": "inline@1"
+        },
+        {
+          "command": "github-security.viewDependabotAlertsInBrowser",
+          "when": "view == github-security.alerts && viewItem == dependabot",
+          "group": "basic@1"
+        },
+        {
+          "command": "github-security.viewCodeScanningAlertsInBrowser",
+          "when": "view == github-security.alerts && viewItem == codeScanning",
+          "group": "inline@1"
+        },
+        {
+          "command": "github-security.viewCodeScanningAlertsInBrowser",
+          "when": "view == github-security.alerts && viewItem == codeScanning",
+          "group": "basic@1"
+        }
+      ],
+      "comments/commentThread/context": [
+        {
+          "command": "github-security.dismissDependabotAlert",
+          "group": "inline",
+          "when": "commentController == security-events.alert"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "github-pull-requests",
+          "title": "GitHub",
+          "icon": "$(github)"
+        }
+      ]
+    },
+    "views": {
+      "github-pull-requests": [
+        {
+          "id": "github-security.alerts",
+          "name": "Security"
+        }
+      ]
+    },
+    "viewsWelcome": [
+      {
+        "view": "github-security.alerts",
+        "contents": "Manage the security alerts for this GitHub repository, by signing in with a GitHub account.\n\n[$(github-inverted) Sign In](command:github-security.signIn)",
+        "when": "github-security:state != SignedIn && github-security:enabled"
+      },
+      {
+        "view": "github-security.alerts",
+        "contents": "No git repositories found",
+        "when": "github-security:enabled != true"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "webpack",
+    "package": "vsce package",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.71.0",
+    "@types/webpack-env": "^1.17.0",
+    "@typescript-eslint/eslint-plugin": "^5.31.0",
+    "@typescript-eslint/parser": "^5.31.0",
+    "eslint": "^8.20.0",
+    "process": "^0.11.10",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.7.4",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "vsce": "^2.11.0"
+  },
+  "dependencies": {
+    "@octokit/rest": "^19.0.4",
+    "mobx": "^6.6.2"
+  }
+}
