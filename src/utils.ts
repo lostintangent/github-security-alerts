@@ -90,7 +90,7 @@ export async function showFileWithAlert(
 
   thread.canReply = false;
   thread.collapsibleState = CommentThreadCollapsibleState.Expanded;
-  thread.label = "GitHub security alert";
+  thread.label = "GitHub Security Alert";
 
   disposables.push(
     window.onDidChangeVisibleTextEditors((e) => {

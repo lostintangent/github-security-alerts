@@ -55,7 +55,7 @@ async function listCodeScanningAlerts(): Promise<CodeScanningAlert[] | null> {
     // to explicitly query for it for each alert.
     setTimeout(async () => {
       const alertDetails = await Promise.all(
-        data.map(async (alert) => {
+        store.codeScanningAlerts!.map(async (alert) => {
           const { data } = await api.codeScanning.getAlert({
             owner: store.repo!.owner,
             repo: store.repo!.name,
@@ -79,7 +79,9 @@ async function listCodeScanningAlerts(): Promise<CodeScanningAlert[] | null> {
 
       runInAction(() => {
         alertDetails.forEach((alertDetail) => {
-          const alert: any = data.find((a) => a.number === alertDetail.number)!;
+          const alert: any = store.codeScanningAlerts!.find(
+            (a) => a.number === alertDetail.number
+          )!;
           alert.rule.help = alertDetail.help;
 
           // @ts-ignore
