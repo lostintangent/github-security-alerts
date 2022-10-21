@@ -12,7 +12,7 @@ Conceptually, this extension is like an editor-integrated equivalent of the `Sec
 
 1. Install this extension, and reload VS Code
 1. Open the `GitHub` tab in the activity bar
-1. Find the `Security` veiw, and click the `Sign in` button
+1. Find the `Security` view, and click the `Sign in` button
 
    <img width="300px" src="https://user-images.githubusercontent.com/116461/196751218-3dec6050-d704-4c35-8989-442d7ed5c4f0.png" />
 
