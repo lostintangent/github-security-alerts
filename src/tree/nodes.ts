@@ -99,7 +99,7 @@ export class CodeScanningAlertNode extends TreeNode {
     this.tooltip = new MarkdownString(alert.rule.help || "");
 
     const { path, start_line } = alert.most_recent_instance.location;
-    this.description = `${path}:${start_line}`;
+    this.description = `by ${alert.tool?.name} in ${path}:${start_line}`;
 
     this.command = {
       command: "github-security.openCodeScanningAlertInstance",
