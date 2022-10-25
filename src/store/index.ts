@@ -95,6 +95,9 @@ export interface CodeScanningAlert {
   html_url: string;
   state: string;
   rule: CodeScanningRule;
+  tool: {
+    name: string;
+  };
   most_recent_instance: {
     message: {
       text: string;
