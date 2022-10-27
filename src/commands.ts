@@ -55,7 +55,7 @@ export async function registerCommands(context: ExtensionContext) {
     )
   );
 
-  function viewAlertsInBrowser(suffix: string = "") {
+  function viewAlertsInBrowser(suffix: string) {
     const url = `https://github.com/${store.repo!.owner}/${
       store.repo!.name
     }/security${suffix}`;
@@ -65,7 +65,7 @@ export async function registerCommands(context: ExtensionContext) {
   context.subscriptions.push(
     commands.registerCommand(
       `github-security.viewAlertsInBrowser`,
-      viewAlertsInBrowser
+      viewAlertsInBrowser.bind(null, "")
     )
   );
 

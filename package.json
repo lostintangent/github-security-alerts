@@ -4,7 +4,7 @@
   "description": "View and resolve security alerts for GitHub repositories, directly from your editor.",
   "publisher": "lostintangent",
   "icon": "icon.png",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "type": "git",
     "url": "https://github.com/lostintangent/github-security-alerts"

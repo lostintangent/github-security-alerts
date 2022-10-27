@@ -19,10 +19,13 @@ import {
 
 const SeveritySortWeight: { [index: string]: number } = {
   critical: 4,
+  error: 4,
   high: 3,
   medium: 2,
+  moderate: 2,
   warning: 2,
   low: 1,
+  note: 1,
 };
 
 function sortSeverities(severities: string[]) {
@@ -136,8 +139,10 @@ class SecurityAlertsTreeProvider
         const node = new TreeNode("Find out more");
         node.command = {
           command: "vscode.open",
-          arguments: ["https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning"],
-          title: "Find out more"
+          arguments: [
+            "https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning",
+          ],
+          title: "Find out more",
         };
         return [node];
       }

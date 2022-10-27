@@ -52,10 +52,24 @@ export class CodeScanningNode extends TreeNode {
 
 const SeverityColor: { [index: string]: string } = {
   critical: "red",
+  error: "red",
   high: "orange",
   medium: "yellow",
+  moderate: "yellow",
   warning: "yellow",
   low: "white",
+  note: "white",
+};
+
+const SeverityIcon: { [index: string]: string } = {
+  critical: "circle-slash",
+  error: "circle-slash",
+  high: "warning",
+  medium: "warning",
+  moderate: "warning",
+  warning: "warning",
+  low: "warning",
+  note: "note",
 };
 
 export class SeverityNode extends TreeNode {
@@ -66,8 +80,9 @@ export class SeverityNode extends TreeNode {
   ) {
     super(titleCase(severity), TreeItemCollapsibleState.Collapsed);
 
+    const themeIcon = SeverityIcon[severity];
     const themeColor = `charts.${SeverityColor[severity]}`;
-    this.iconPath = new ThemeIcon("warning", new ThemeColor(themeColor));
+    this.iconPath = new ThemeIcon(themeIcon, new ThemeColor(themeColor));
     this.description = alerts.length.toString();
   }
 }
