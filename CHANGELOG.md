@@ -1,3 +1,7 @@
+## v0.0.3 (11/10/22)
+
+- Fixed a rendering issue with comments
+
 ## v0.0.2 (10/26/22)
 
 - Added support for the `Note` severity type, that Code scanning supports

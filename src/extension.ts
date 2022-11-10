@@ -10,7 +10,11 @@ export async function activate(context: vscode.ExtensionContext) {
   registerCommands(context);
   registerTreeProvider(store);
   registerDiagnosticsProvider(store);
-  
+
   await initializeGit(store);
   initializeAuth();
+
+  vscode.workspace
+    .getConfiguration("comments")
+    .update("openView", "never", vscode.ConfigurationTarget.Global);
 }
