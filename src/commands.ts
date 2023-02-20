@@ -91,6 +91,7 @@ export async function registerCommands(context: ExtensionContext) {
           alert.dependency.scope === DependabotAlertDependencyScope.development
             ? " (Development)"
             : "";
+
         showFileWithAlert(
           alert.number,
           "dependabot",
@@ -115,10 +116,16 @@ export async function registerCommands(context: ExtensionContext) {
           location.end_column - 1
         );
 
+        // Code scanning uses an "image//" prefix for build artifacts that were
+        // only available in the scanning environment, so remove that.
+        const path = location.path.startsWith("image//")
+          ? location.path.substring(6)
+          : location.path;
+
         await showFileWithAlert(
           alert.number,
           "code-scanning",
-          location.path,
+          path,
           alert.most_recent_instance.message.text,
           alert.rule.help,
           { selection }

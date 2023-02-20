@@ -45,6 +45,16 @@ export async function showFileWithAlert(
   clearAlertUI(!options.search);
 
   const fileUri = Uri.joinPath(workspace.workspaceFolders![0].uri, path);
+  try {
+    // This API will throw when the requested
+    // URI doesn't actually exist.
+    await workspace.fs.stat(fileUri);
+  } catch {
+    return window.showInformationMessage(
+      `This alert is associated with a file that doesn't appear to exist: ${path}. Is it possibly a build artifact?`,
+      "Close" // I'm adding a token button to force VS Code to display the full message, as opposed to only the first line
+    );
+  }
 
   // Open the file and force it to seek
   // to the first line before searching.

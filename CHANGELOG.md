@@ -1,3 +1,7 @@
+## v0.0.4 (02/20/23)
+
+- Show a friendly error message when a security alert is associated with a non-existing file
+
 ## v0.0.3 (11/10/22)
 
 - Fixed a rendering issue with comments
