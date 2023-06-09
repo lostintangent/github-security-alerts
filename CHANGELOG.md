@@ -1,3 +1,7 @@
+## v0.0.5 (06/09/23)
+
+- Fixed an issue with the parsing of the repository remote URL. Previously, it only supported HTTPS format, but now it also works with SSH format.
+
 ## v0.0.4 (02/20/23)
 
 - Show a friendly error message when a security alert is associated with a non-existing file

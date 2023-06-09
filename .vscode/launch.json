@@ -1,0 +1,24 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "extensionHost",
+			"request": "launch",
+			"name": "Launch Extension",
+			"runtimeExecutable": "${execPath}",
+			"args": [
+				"--extensionDevelopmentPath=${workspaceFolder}",
+				"--disable-extension=github.synth-lab",
+				"--disable-extension=github.copilot-nightly",
+				"--disable-extension=github.copilot-labs"
+			],
+			"preLaunchTask": "compile",
+			"smartStep": true,
+			"sourceMaps": true,
+			"outFiles": [
+				"${workspaceFolder}/**/*.js",
+				"!**/node_modules/**"
+			]
+		},
+	]
+}
