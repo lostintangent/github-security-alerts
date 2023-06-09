@@ -36,7 +36,15 @@ async function getGitApi(): Promise<GitAPI | undefined> {
   return extension.exports.getAPI(1);
 }
 
-const GITHUB_PATTERN = /github\.com\/([^/]+)\/([^/]+?)(?:\.git)?$/i;
+// the regexp works as follows:
+// * first we match the github.com part
+// * then we match a slash or a colon (the former is used by HTTPS remotes, the latter by SSH remotes)
+// * then we match the owner name (any non-slash, non-colon character)
+// * then we match a slash
+// * then we match the repo name (any non-slash, non-colon character)
+// * then we optionally match a .git suffix
+// * the i flag makes the regexp case-insensitive
+const GITHUB_PATTERN = /github\.com[\/|:]([^/^:]+)\/([^/^:]+?)(?:\.git)?$/i;
 function checkGitHubRemote(git: GitAPI, store: Store) {
   const remote = git.repositories[0].state.remotes.find(
     (remote) => remote.fetchUrl && remote.fetchUrl.includes("github.com")
@@ -65,20 +73,20 @@ function hasRemotes(repository?: Repository) {
 
 export async function initializeGit(store: Store) {
   const git = await getGitApi();
-  if (!git) return;
-
-  if (hasRemotes(git.repositories[0])) {
-    checkGitHubRemote(git, store);
-  } else {
-    const repoDisposable = git.onDidOpenRepository((repository) => {
-      repoDisposable.dispose();
-
-      const stateDisposable = repository.state.onDidChange(() => {
-        if (hasRemotes(repository)) {
-          stateDisposable.dispose();
-          checkGitHubRemote(git, store);
-        }
+  if (git) {
+    if (hasRemotes(git.repositories[0])) {
+      checkGitHubRemote(git, store);
+    } else {
+      const repoDisposable = git.onDidOpenRepository((repository) => {
+        repoDisposable.dispose();
+  
+        const stateDisposable = repository.state.onDidChange(() => {
+          if (hasRemotes(repository)) {
+            stateDisposable.dispose();
+            checkGitHubRemote(git, store);
+          }
+        });
       });
-    });
+    }  
   }
 }
